@@ -93,7 +93,7 @@ Both paths prints the result in json format. If the sign in was successful, the 
 
 ####Autoload client-side files
 
-It is possible to tell the engine to automaticlly load css and js files on the client side. First create a json-file, config.json, tentatively stored under ./client/config/. Also create a config file for localhost, config.local.json. Usually you want to use a compiled version for when the project live.
+It is possible to tell the engine to automatically load css and js files on the client side. First create a json-file, config.json, tentatively stored under ./client/config/. Also create a config file for localhost, config.local.json. Usually you want to use a compiled version for when the project live.
 
 	{
 		"title": "Page title",
@@ -190,11 +190,11 @@ The Controller class handles what the page should be presenting. Based on the $_
 
 A service is an extension of the Controller class and can be seen as a helper class. Used a lot by View's and an API controller.
 
-If the GET parameter 'service' is set, a service matching that property name will be generated. And if the method parameter is set, the Controller class will then try to call that method instide of the service. This is effective for example creating an API. Consider the following url: 
+If the GET parameter 'service' is set, a service matching that property name will be generated. And if the method parameter is set, the Controller class will then try to call that method inside of the service. This is effective for example creating an API. Consider the following url:
 
 api/user/update/1
 
-This will create an APIController, which will create a UserService and the method update will be called. The last parameter, "1", is the output parameter, refering to what user id we will be updating.
+This will create an APIController, which will create a UserService and the method update will be called. The last parameter, "1", is the output parameter, referring to what user id we will be updating.
 
 ###View
 
