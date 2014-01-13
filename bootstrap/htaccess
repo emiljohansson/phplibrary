@@ -1,0 +1,66 @@
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^/?([a-z]+)/$									./?controller=$1 [L]
+RewriteRule ^/?([a-z]+)/([a-z0-9]+)/$						./?controller=$1&service=$2 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+)/$					./?controller=$1&service=$2&method=$3 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([0-9]+)/$					./?controller=$1&service=$2&method=$3 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+)/$					./?controller=$1&service=$2&method=$3&output=$4 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+)/([a-z0-9\s]+)/$	./?controller=$1&service=$2&method=$3&output=$4 [L]
+
+RewriteRule ^(.*)/$ 										./$1 [L,R=301]
+RewriteRule ^/?([a-z]+)$ 									./?controller=$1 [L]
+RewriteRule ^/?([a-z]+)/([a-z0-9]+)$ 						./?controller=$1&service=$2 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+)$					./?controller=$1&service=$2&method=$3 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([0-9]+)$					./?controller=$1&service=$2&method=$3 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+)/([a-z0-9\s]+)$	./?controller=$1&service=$2&method=$3&output=$4 [L]
+
+
+RewriteRule ^/?([a-z]+).(xml|json)$									./?controller=$1&format=$2 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+).(xml|json)$						./?controller=$1&service=$2&format=$3 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+).(xml|json)$				./?controller=$1&service=$2&method=$3&format=$4 [L]
+RewriteRule ^/?([a-z]+)/([a-z]+)/([a-z]+)/([a-z0-9\s]+).(xml|json)$	./?controller=$1&service=$2&method=$3&output=$4&format=$5 [L]
+
+
+#
+#	gzip
+#	compress text, html, javascript, css, xml:
+#
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+# Or, compress certain file types by extension:
+<files *.html>
+SetOutputFilter DEFLATE
+</files>
+
+
+#
+#	cache
+#
+ExpiresActive On
+ExpiresDefault A0
+ 
+# 1 YEAR - doesn't change often
+<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+ExpiresDefault A29030400
+</FilesMatch>
+ 
+# 1 WEEK - possible to be changed, unlikely
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|txt|xml|js|css)$">
+ExpiresDefault A604800
+</FilesMatch>
+ 
+# 3 HOUR - core content, changes quickly
+#<FilesMatch "\.(txt|xml|js|css)$">
+#ExpiresDefault A10800
+#</FilesMatch>

@@ -1,0 +1,23 @@
+{
+	"title": "Page title",
+	"meta": [
+		{
+			"name": "author",
+			"content": "Emil Johansson"
+		},
+		{
+			"name": "keywords",
+			"content": ""
+		},
+		{
+			"name": "description",
+			"content": ""
+		},
+		{
+			"name": "viewport",
+			"content": "width=device-width, initial-scale=1.0"
+		}
+	],
+	"css": ["client/lib/css/", "client/application/css/"],
+	"js": ["client/lib/js/", "client/application/js/"]
+}
