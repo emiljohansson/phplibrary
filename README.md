@@ -2,7 +2,7 @@
 
 {engine_name} is a library that can be used for advanced and simple web applications. It makes it easy to quickly create a new web page and collecting data from the database.
 
-It is not necessary to use a database, the Engine can still create the html document. 
+It is not necessary to use a database, the Engine can still create html documents. 
 
 ##Set up a new project 
 
@@ -212,6 +212,13 @@ The view abstracts the data from the model the controller created and creates th
 ##DOMDocument, /client
 
 Everything presented to the user is created by using the PHP DOMDocument. There is no use of the echo method, using echo will break the DOM structure.
+
+##Debug
+
+To debug an object, use the Console object:
+
+Console::log($myObject);
+Console::error($myObject);
 
 ##TODO
 
