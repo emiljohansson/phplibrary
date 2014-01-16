@@ -127,7 +127,9 @@ As default the autoloader method, autoloader.php, will look for files stored und
 	defaultRootPath("new/path/tofiles/");
 	new Main();
 
-####Logging SQL, exceptions and performances
+It's also possible to add other paths, like I do with the library files in the bootstrap folder. Which makes it possible to reuse the files in other projects.
+
+####Logging SQL, exceptions and performances [files not added yet]
 
 The engine is capable of logging all sql made by the user, all exceptions that might occur and how the application is performing. Start by adding a "var" folder in the base folder with the following sub-folder:
 
@@ -146,7 +148,7 @@ If unit tests are used also add the same structure, but in a test folder, still 
 			/test
 				/...
 
-####Unit test
+####Unit test [files not added yet]
 
 The engine currently have about 7 test cases, with almost 100 passed tests. To setup unit test capability start by adding a test folder in the project base folder:
 
