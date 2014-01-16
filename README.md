@@ -1,6 +1,6 @@
-#Engine
+#PHP Framework
 
-{engine_name} is a library that can be used for advanced and simple web applications. It makes it easy to quickly create a new web page and collecting data from the database.
+{engine_name} is a framework that can be used for advanced and simple web applications. It makes it easy to quickly create a new web page and collecting data from the database.
 
 It is not necessary to use a database, the Engine can still create html documents. 
 
