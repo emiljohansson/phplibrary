@@ -24,7 +24,7 @@
  *	@version	0.1.0
  *	@author		Emil Johansson <emiljohansson.se@gmail.com>
  */
-class View extends Composite
+class View extends Panel
 {
 	//-----------------------------------------------------------
 	//	Public static properties
@@ -45,10 +45,37 @@ class View extends Composite
 	 *	@var Model
 	 */
 	public $model;
+	
+	//-----------------------------------------------------------
+	//	Constructor method
+	//-----------------------------------------------------------
+
+	/**
+	 *	...
+	 *	
+	 *	@return void
+	 */
+	public function __construct() 
+	{
+		parent::__construct();
+		$this->initWidget($this);
+		$this->setElement(DOM::createDiv());
+	}
 
 	//-----------------------------------------------------------
 	//	Public methods
 	//-----------------------------------------------------------
+
+	/**
+	 *	...
+	 *
+	 *	@param	Widget	$widget
+	 *	@return	void
+	 */
+	public function initWidget(Widget $widget)
+	{
+		$this->widget = $widget;
+	}
 
 	/**
 	 *	Returns the view as a Widget object.
