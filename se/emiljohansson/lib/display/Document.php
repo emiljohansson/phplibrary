@@ -30,7 +30,7 @@
  *	@author		Emil Johansson <emiljohansson.se@gmail.com>
  *	@todo		Support json
  */
-final class Document
+class Document implements DocumentInterface
 {
 	//-----------------------------------------------------------
 	//	Private static properties
@@ -49,12 +49,32 @@ final class Document
 	/**
 	 *	Returns an instance of the Document.
 	 *
-	 *	@return	Document
+	 *	@return	DocumentInterface
 	 */
 	public static final function get() 
 	{
-		if (!isset(self::$instance)) self::$instance = new Document();
+		if (!isset(self::$instance)) {
+			self::init();
+		}
 		return self::$instance;
+	}
+
+	/**
+	 *	Returns an instance of the Document.
+	 *
+	 *	@return	Document
+	 */
+	public static final function init($format = null) 
+	{
+		if ($format === 'xml') {
+			self::$instance = new XMLDocument();
+			return;
+		}
+		if ($format === 'json') {
+			self::$instance = new JsonDocument();
+			return;
+		}
+		self::$instance = new Document();
 	}
 
 	//-----------------------------------------------------------
@@ -74,28 +94,28 @@ final class Document
 	public $title = 'Default title';
 
 	//-----------------------------------------------------------
-	//	Private properties
+	//	Protected properties
 	//-----------------------------------------------------------
 
 	/**
 	 *	An instance to the native DOMDocument class.
 	 *	@var DOMDocument
 	 */
-	private $document;
+	protected $document;
 	
 	/**
 	 *	The head tag; <head></head>. Meta, css and js files will
 	 *	be appendend to this property.
 	 *	@var DOMElement
 	 */
-	private $head;
+	protected $head;
 	
 	/**
 	 *	The body tag; <body></body>. All display elements for the 
 	 *	application will be placed here.
 	 *	@var DOMElement
 	 */
-	private $body;
+	protected $body;
 
 	//-----------------------------------------------------------
 	//	Constructor method
@@ -106,7 +126,7 @@ final class Document
 	 *	
 	 *	@return void
 	 */
-	private final function __construct() 
+	protected function __construct() 
 	{
 		$this->document	= new DOMDocument();
 		$this->head		= $this->document->createElement('head');
@@ -198,31 +218,19 @@ final class Document
 	}
 
 	/**
-	 *	Creates the page.
+	 *	Constructs the page.
 	 *
 	 *	@return	void
 	 */
-	public final function assemble($format = 'html')
+	public function assemble()
 	{
-		$html = $this->createWrapperNode($format);
+		$html = $this->createWrapperNode();
 		DOM::appendChild($this->head, Document::get()->createElement('title', $this->title));
 		DOM::appendChild($html, $this->head);
 		DOM::appendChild($html, $this->body);
 		DOM::appendChild($this->document, $html);
 		RootPanel::get()->load();
-		if ($format === 'xml') {
-			return $this->document->saveXML();
-		}
-		if ($format === 'json') {
-			/*$result = array();
-			$parser = new JSONParser();
-			$parser->domNodes($html, $result);
-			console::log(json_encode($result));
-			return;*/
-
-			#not implemented yet...
-		}
-		$doctype	= '<!DOCTYPE html>';
+		$doctype = '<!DOCTYPE html>';
 		return $doctype.$this->document->saveHTML();
 	}
 

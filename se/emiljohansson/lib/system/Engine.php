@@ -125,6 +125,7 @@ class Engine
 		if (!isset($_GET['format'])) return;
 		$this->setContentType($_GET['format']);
 		$this->format = $_GET['format'];
+		Document::init($this->format);
 	}
 
 	/**
@@ -327,7 +328,7 @@ class Engine
 	private function renderWithDocument() 
 	{
 		$this->controller->go(RootPanel::get());
-		$output	= Document::get()->assemble($this->format);
+		$output	= Document::get()->assemble();
 		printf('%s', $output);
 	}
 
