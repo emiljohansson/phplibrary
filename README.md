@@ -1,4 +1,4 @@
-#PHP Framework test
+#PHP Framework
 
 {engine_name} is a framework that can be used for advanced and simple web applications. It makes it easy to quickly create a new web page and collecting data from the database.
 
