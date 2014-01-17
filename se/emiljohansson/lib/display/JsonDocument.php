@@ -5,16 +5,8 @@ class JsonDocument extends Document implements DocumentInterface
 {
 	public final function assemble()
 	{
-		/*
-		if ($format === 'json') {
-			/*$result = array();
-			$parser = new JSONParser();
-			$parser->domNodes($html, $result);
-			console::log(json_encode($result));
-			return;*/
-
-			#not implemented yet...
-		//}
-		return $this->document->saveHTML();
+		$head = array('status' => 1);
+		$body = array('test' => 10);
+		return json_encode(array('head' => $head, 'body' => $body));
 	}
 }
