@@ -30,7 +30,7 @@
  *	@author		Emil Johansson <emiljohansson.se@gmail.com>
  *	@todo		Support json
  */
-class Document implements DocumentInterface
+abstract class Document
 {
 	//-----------------------------------------------------------
 	//	Private static properties
@@ -74,7 +74,7 @@ class Document implements DocumentInterface
 			self::$instance = new JsonDocument();
 			return;
 		}
-		self::$instance = new Document();
+		self::$instance = new HTMLDocument();
 	}
 
 	//-----------------------------------------------------------
@@ -222,34 +222,5 @@ class Document implements DocumentInterface
 	 *
 	 *	@return	void
 	 */
-	public function assemble()
-	{
-		$html = $this->createWrapperNode();
-		DOM::appendChild($this->head, Document::get()->createElement('title', $this->title));
-		DOM::appendChild($html, $this->head);
-		DOM::appendChild($html, $this->body);
-		DOM::appendChild($this->document, $html);
-		RootPanel::get()->load();
-		$doctype = '<!DOCTYPE html>';
-		return $doctype.$this->document->saveHTML();
-	}
-
-	//-----------------------------------------------------------
-	//	Private methods
-	//-----------------------------------------------------------
-
-	/**
-	 *	Initializes and returns the html node.
-	 *
-	 *	@return	DOMElement
-	 */
-	private final function createWrapperNode($format = null) 
-	{
-		$html = $this->document->createElement('html');
-		if ($format === null) {
-			$html->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
-			$html->setAttribute('lang', $this->lang);
-		}
-		return $html;
-	}
+	abstract public function assemble();
 }

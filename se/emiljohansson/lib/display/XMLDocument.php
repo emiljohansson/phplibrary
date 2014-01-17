@@ -27,9 +27,7 @@ class XMLDocument extends Document implements DocumentInterface
 	//-----------------------------------------------------------
 	
 	/**
-	 *	Constructs the page.
-	 *
-	 *	@return	void
+	 *	{@inheritdoc}
 	 */
 	public final function assemble()
 	{

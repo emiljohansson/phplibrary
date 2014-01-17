@@ -180,7 +180,7 @@ class Engine
 			$this->initDefaultController();
 			return;
 		}
-		$this->controller	= new $controllerClass();
+		$this->controller = new $controllerClass();
 	}
 
 	/**
@@ -209,7 +209,6 @@ class Engine
 		$config	= $this->generateConfigData();
 		$doc	= Document::get();
 		if (!isset($config)) {
-			#Console::error("An error occured and the application will not be working. Please contact admin.");
 			return;
 		}
 		foreach ($config['meta'] as $arr) {
