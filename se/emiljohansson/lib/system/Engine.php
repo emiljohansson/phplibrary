@@ -1,106 +1,105 @@
 <?php
 
 /**
- *	{LIBRARY_NAME}
+ * {LIBRARY_NAME}
  *
- *	PHP Version 5.3
+ * PHP Version 5.3
  *
- *	@copyright	Emil Johansson 2013
- *	@license	http://www.opensource.org/licenses/mit-license.php MIT
- *	@link		https://github.com/emiljohansson
+ * @copyright	Emil Johansson 2013
+ * @license		http://www.opensource.org/licenses/mit-license.php MIT
+ * @link		https://github.com/emiljohansson
  */
 
-//-----------------------------------------------------------
-//	Public class
-//-----------------------------------------------------------
+//--------------------------------------------------------------
+// Public class
+//--------------------------------------------------------------
 
 /**
- *	The engine/base of an application.
+ * The engine/base of an application.
  *
- *	The Engine object is the starting point of an application.
- *	It initializes the session, the MVC objects and the DOM.
+ * The Engine object is the starting point of an application.
+ * It initializes the session, the MVC objects and the DOM.
  *
- *	@version	0.1.2
- *	@author		Emil Johansson <emiljohansson.se@gmail.com>
+ * @version	0.1.2
+ * @author		Emil Johansson <emiljohansson.se@gmail.com>
  */
-class Engine
-{
+class Engine {
+
 	//-----------------------------------------------------------
-	//	Public properties
+	// Public properties
 	//-----------------------------------------------------------
 
 	/**
-	 *	An instance of the Session object, which will contains 
-	 *	an instance of this Engine object so it will be possible
-	 *	to access the engine anywhere in the application code.
-	 *	@var Session
+	 * An instance of the Session object, which will contains 
+	 * an instance of this Engine object so it will be possible
+	 * to access the engine anywhere in the application code.
+	 * @var Session
 	 */
 	public $session;
 
 	/**
-	 *	An instance of a Controller object, created using the
-	 *	URL controller parameter.
-	 *	@var Controller
+	 * An instance of a Controller object, created using the
+	 * URL controller parameter.
+	 * @var Controller
 	 */
 	public $controller;
 
 	/**
-	 *	Where the starting point of the project is stored.
-	 *	@var string
+	 * Where the starting point of the project is stored.
+	 * @var string
 	 */
 	public $default_root_path = "./";
 
 	//-----------------------------------------------------------
-	//	Protected properties
+	// Protected properties
 	//-----------------------------------------------------------
 
 	/**
-	 *	Config object.
-	 *	@var Config
+	 * Config object.
+	 * @var Config
 	 */
 	protected $config;
 
 	/**
-	 *	An object for including client side files like css and js.
-	 *	@var FileLoader
+	 * An object for including client side files like css and js.
+	 * @var FileLoader
 	 */
 	protected $fileLoader;
 
 	/**
-	 *	The version of the application not the engine library.
-	 *	@var string
+	 * The version of the application not the engine library.
+	 * @var string
 	 */
 	protected $applicationVersion;
 
 	//-----------------------------------------------------------
-	//	Private properties
+	// Private properties
 	//-----------------------------------------------------------
 
 	/**
-	 *	The format the page will be rendered in.
-	 *	@var string
+	 * The format the page will be rendered in.
+	 * @var string
 	 */
 	private $format = 'html';
 
 	//-----------------------------------------------------------
-	//	Constructor method
+	// Constructor method
 	//-----------------------------------------------------------
 
 	/**
-	 *	Initializes the following parts:
-	 *	<ul>
-	 *		<li>session: Starts the current session.</li>
-	 *		<li>database: The connection to the MySQL database.</li>
-	 *		<li>project spcific: Any possible special properties the project might have.</li>
-	 *		<li>controller: Handles what will be presented to the user.</li>
-	 *		<li>document: Creates a DOM structure.</li>
-	 *		<li>output: Renders the output of the Document object.</li>
-	 *	</ul>
-	 *	
-	 *	@return void
+	 * Initializes the following parts:
+	 * <ul>
+	 * 	<li>session: Starts the current session.</li>
+	 * 	<li>database: The connection to the MySQL database.</li>
+	 * 	<li>project spcific: Any possible special properties the project might have.</li>
+	 * 	<li>controller: Handles what will be presented to the user.</li>
+	 * 	<li>document: Creates a DOM structure.</li>
+	 * 	<li>output: Renders the output of the Document object.</li>
+	 * </ul>
+	 * 
+	 * @return void
 	 */
-	public function __construct() 
-	{
+	public function __construct() {
 		$this->initFormat();
 		$this->initSession();
 		$this->initDatabase();
@@ -111,17 +110,16 @@ class Engine
 	}
 
 	//-----------------------------------------------------------
-	//	Protected methods
+	// Protected methods
 	//-----------------------------------------------------------
 
 	/**
-	 *	Based on the format property, the content can be changed from
-	 *	default html to xml or json.
+	 * Based on the format property, the content can be changed from
+	 * default html to xml or json.
 	 *
-	 *	@return	void
+	 * @return	void
 	 */
-	protected function initFormat() 
-	{
+	protected function initFormat() {
 		if (!isset($_GET['format'])) return;
 		$this->setContentType($_GET['format']);
 		$this->format = $_GET['format'];
@@ -129,22 +127,20 @@ class Engine
 	}
 
 	/**
-	 *	Initializes the engine to the current session.
-	 *	
-	 *	@return	void
+	 * Initializes the engine to the current session.
+	 * 
+	 * @return	void
 	 */
-	protected function initSession() 
-	{
+	protected function initSession() {
 		Session::init($this);
 	}
 
 	/**
-	 *	Initializes a connection to the MySQL database.
-	 *	
-	 *	@return	void
+	 * Initializes a connection to the MySQL database.
+	 * 
+	 * @return	void
 	 */
-	protected function initDatabase() 
-	{
+	protected function initDatabase() {
 		$this->config		= new Config();
 		Database::$host		= $this->config->host;
 		Database::$username	= $this->config->username;
@@ -153,23 +149,21 @@ class Engine
 	}
 
 	/**
-	 *	Initializes any possible special properties the project might have.
-	 *	By default the project location is found and stored in the View class.
-	 *	
-	 *	@return	void
+	 * Initializes any possible special properties the project might have.
+	 * By default the project location is found and stored in the View class.
+	 * 
+	 * @return	void
 	 */
-	protected function initProjectSpecific() 
-	{
+	protected function initProjectSpecific() {
 		View::$projectLocation = str_replace("index.php", "", $_SERVER['PHP_SELF']);
 	}
 
 	/**
-	 *	Initializes the selected controller, based on the URL controller parameter.
-	 *	
-	 *	@return	void
+	 * Initializes the selected controller, based on the URL controller parameter.
+	 * 
+	 * @return	void
 	 */
-	protected function initController()
-	{
+	protected function initController() {
 		if (!isset($_GET['controller'])) {
 			$this->initDefaultController();
 			return;
@@ -184,26 +178,24 @@ class Engine
 	}
 
 	/**
-	 *	Initializes the default controller when the url doesn't specifies it.
-	 *	Either override this method or create a HomeController class for the project.
-	 *	
-	 *	@return	void
+	 * Initializes the default controller when the url doesn't specifies it.
+	 * Either override this method or create a HomeController class for the project.
+	 * 
+	 * @return	void
 	 */
-	protected function initDefaultController()
-	{
+	protected function initDefaultController() {
 		if (!class_exists("HomeController")) return;
 		$this->controller = new HomeController();
 	}
 
 	/**
-	 *	Initializes content for the head node for the html document.
-	 *	If a json config file is specified, all meta, css and js files
-	 *	will be automatically generated.
+	 * Initializes content for the head node for the html document.
+	 * If a json config file is specified, all meta, css and js files
+	 * will be automatically generated.
 	 *
-	 *	@return	void
+	 * @return	void
 	 */
-	protected function initDocument() 
-	{
+	protected function initDocument() {
 		if ($this->format !== 'html') return;
 		$this->initFileLoader();
 		$config	= $this->generateConfigData();
@@ -220,13 +212,16 @@ class Engine
 		foreach ($config['js'] as $path) {
 			$this->appendFile($doc, $path, "js");
 		}
+		if (isset($config['favicon'])) {
+			$doc->addFavicon($config['favicon']['href']);
+		}
 	}
 
 	/**
-	 *	Initializes the file loader object. Override this method
-	 *	if special files need to be read in a certain order.
+	 * Initializes the file loader object. Override this method
+	 * if special files need to be read in a certain order.
 	 *
-	 *	@return	void
+	 * @return	void
 	 */
 	protected function initFileLoader() 
 	{
@@ -234,11 +229,11 @@ class Engine
 	}
 
 	/**
-	 *	Parses the data from the config.json file.
-	 *	
-	 *	@param	string | null	$jsonFile
-	 *	@return	JSONParser
-	 *	@throws	ApplicationException
+	 * Parses the data from the config.json file.
+	 * 
+	 * @param	string | null	$jsonFile
+	 * @return	JSONParser
+	 * @throws	ApplicationException
 	 */
 	protected function generateConfigData($jsonFile = null)
 	{
@@ -259,10 +254,10 @@ class Engine
 	}
 
 	/**
-	 *	Renders the page.
+	 * Renders the page.
 	 *
-	 *	@return	void
-	 *	@todo	Come up with a more generic solution.
+	 * @return	void
+	 * @todo	Come up with a more generic solution.
 	 */
 	protected function initOutput() 
 	{
@@ -279,16 +274,16 @@ class Engine
 	}
 
 	//-----------------------------------------------------------
-	//	Private methods
+	// Private methods
 	//-----------------------------------------------------------
 
 	/**
-	 *	Appends files from a base url.
+	 * Appends files from a base url.
 	 *
-	 *	@param	Document	$doc
-	 *	@param	string		$path
-	 *	@param	string		$extension
-	 *	@return	void
+	 * @param	Document	$doc
+	 * @param	string		$path
+	 * @param	string		$extension
+	 * @return	void
 	 */
 	private function appendFile(Document $doc, $path, $extension) 
 	{
@@ -309,10 +304,10 @@ class Engine
 	}
 
 	/**
-	 *	Sets a content type.
+	 * Sets a content type.
 	 *
-	 *	@param	string	$type
-	 *	@return	void
+	 * @param	string	$type
+	 * @return	void
 	 */ 
 	private function setContentType($type = "html") 
 	{
@@ -320,9 +315,9 @@ class Engine
 	}
 
 	/**
-	 *	Initializes the page and its elements as html content.
+	 * Initializes the page and its elements as html content.
 	 *
-	 *	@return	void
+	 * @return	void
 	 */
 	private function renderWithDocument() 
 	{
@@ -332,9 +327,9 @@ class Engine
 	}
 
 	/**
-	 *	Initializes the page and its elements as json content.
+	 * Initializes the page and its elements as json content.
 	 *
-	 *	@return	void
+	 * @return	void
 	 */
 	private function renderOutputWithController() 
 	{
