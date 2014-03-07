@@ -172,6 +172,7 @@ abstract class Document {
 	public final function addFavicon($url) {
 		$element = $this->document->createElement('link');
 		$element->setAttribute('rel', 'shortcut icon');
+		$element->setAttribute('type', 'image/x-icon');
 		$element->setAttribute('href', $url);
 		$this->head->appendChild($element);
 	}
