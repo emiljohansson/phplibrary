@@ -1,82 +1,81 @@
 <?php
 
 /**
- *	{LIBRARY_NAME}
+ * {LIBRARY_NAME}
  *
- *	PHP Version 5.3
+ * PHP Version 5.3
  *
- *	@copyright	Emil Johansson 2013
- *	@license	http://www.opensource.org/licenses/mit-license.php MIT
- *	@link		https://github.com/emiljohansson
+ * @copyright	Emil Johansson 2013
+ * @license		http://www.opensource.org/licenses/mit-license.php MIT
+ * @link		https://github.com/emiljohansson
  */
 
-//-----------------------------------------------------------
-//	Public class
-//-----------------------------------------------------------
+//--------------------------------------------------------------
+// Public class
+//--------------------------------------------------------------
 
 /**
- *	The direct and only connection to the MySQL database.
+ * The direct and only connection to the MySQL database.
  *
- *	An extension of mysqli. 
- *	To access the singleton instance use the public static method instance().
- *	<code>
- *	Database::instance()->query($sql);
- *	</code>
+ * An extension of mysqli. 
+ * To access the singleton instance use the public static method instance().
+ * <code>
+ * Database::instance()->query($sql);
+ * </code>
  *
- *	@version	0.1.0
- *	@author		Emil Johansson <emiljohansson.se@gmail.com>
+ * @version	0.1.0
+ * @author	Emil Johansson <emiljohansson.se@gmail.com>
  */
-class Database extends mysqli 
-{
-	//-----------------------------------------------------------
-	//	Public static properties
-	//-----------------------------------------------------------
+class Database extends mysqli {
+
+	//----------------------------------------------------------
+	// Public static properties
+	//----------------------------------------------------------
 
 	/**
-	 *	The location of the database, i.e. localhost.
-	 *	@var string
+	 * The location of the database, i.e. localhost.
+	 * @var string
 	 */
 	public static $host;
 
 	/**
-	 *	Username for the database.
-	 *	@var string
+	 * Username for the database.
+	 * @var string
 	 */
 	public static $username;
 
 	/**
-	 *	Password for the user.
-	 *	@var string
+	 * Password for the user.
+	 * @var string
 	 */
 	public static $password;
 
 	/**
-	 *	The database name.
-	 *	@var string
+	 * The database name.
+	 * @var string
 	 */
 	public static $dbname;
 
-	//-----------------------------------------------------------
-	//	Private static properties
-	//-----------------------------------------------------------
+	//----------------------------------------------------------
+	// Private static properties
+	//----------------------------------------------------------
 
 	/**
-	 *	Singular object.
-	 *	@var Database
+	 * Singular object.
+	 * @var Database
 	 */
 	private static $instance;
 
-	//-----------------------------------------------------------
-	//	Public static methods
-	//-----------------------------------------------------------
+	//----------------------------------------------------------
+	// Public static methods
+	//----------------------------------------------------------
 
 	/**
-	 *	Returns the instance of the database object.
-	 *	
-	 *	@return	Database
+	 * Returns the instance of the database object.
+	 * 
+	 * @return	Database
 	 */
 	public static function instance() {
-
 		if (!isset(self::$instance)) {
 			self::$instance = new Database();
 			self::$instance->query('SET CHARACTER SET utf8');
@@ -85,34 +84,32 @@ class Database extends mysqli
 
 	}
 
-	//-----------------------------------------------------------
-	//	Constructor method
-	//-----------------------------------------------------------
+	//----------------------------------------------------------
+	// Constructor method
+	//----------------------------------------------------------
 
 	/**
-	 *	Passes the public static properties to the mysqli object.
+	 * Passes the public static properties to the mysqli object.
 	 *
-	 *	@return	void
+	 * @return	void
 	 */
-	public function __construct() 
-	{
+	public function __construct() {
 		parent::__construct(self::$host, self::$username, self::$password, self::$dbname);
 		if ($this->connect_errno) {
 			echo "Failed to connect to MySQL: (" . $this->connect_errno . ") " . $this->connect_error;
 		}
 	}
 
-	//-----------------------------------------------------------
-	//	Public methods
-	//-----------------------------------------------------------
+	//----------------------------------------------------------
+	// Public methods
+	//----------------------------------------------------------
 
 	/**
-	 *	Calls parent rollback and then reverses the auto increment.
+	 * Calls parent rollback and then reverses the auto increment.
 	 *
-	 *	@return void
+	 * @return void
 	 */
-	public function rollback($flags = NULL, $name = NULL)
-	{
+	public function rollback($flags = NULL, $name = NULL) {
 		parent::rollback();
 		$sql	= "SHOW tables";
 		$result	= Database::instance()->query($sql);

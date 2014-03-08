@@ -36,12 +36,12 @@ class AuthController extends ApiController {
 	}
 
 	/**
-	 * Makes an attempt to match the passed email and password.
+	 * Makes an attempt to match the passed username and password.
 	 *
 	 * @return void
 	 */
 	public function login() {
-		$record	= $this->model->attempt(@$_POST['email'], @$_POST['password']);
+		$record	= $this->model->attempt(@$_POST['username'], @$_POST['password']);
 
 		if (isset($record)) {
 			unset($record->password);
@@ -95,13 +95,13 @@ class AuthController extends ApiController {
 	/**
 	 * Makes an attempt to find a match.
 	 *
-	 * @param	string	email
+	 * @param	string	username
 	 * @param	string	password
 	 * @param	Record || null
 	 */
-	private function attempt($email, $password) {
+	private function attempt($username, $password) {
 		$user			= new Record();
-		$user->email	= $email;
+		$user->username	= $username;
 		$user->password	= $password;
 		$row = $this->gateway->match($user);
 		if (!isset($row)) return null;

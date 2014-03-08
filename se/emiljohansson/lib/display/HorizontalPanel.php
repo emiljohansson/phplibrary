@@ -5,6 +5,8 @@
  *
  * PHP Version 5.3
  *
+ * Inspired by the GWT library <http://www.gwtproject.org/>
+ *
  * @copyright	Emil Johansson 2013
  * @license		http://www.opensource.org/licenses/mit-license.php MIT
  * @link		https://github.com/emiljohansson
@@ -15,12 +17,24 @@
 //--------------------------------------------------------------
 
 /**
- * ...
+ * summary...
  *
- * @version	0.1.1
- * @author	Emil Johansson <emiljohansson.se@gmail.com>
+ * description...
+ *
+ * @version	0.1.0
+ * @author		Emil Johansson <emiljohansson.se@gmail.com>
  */
-class AuthModel extends Model {
+class HorizontalPanel extends Panel {
+
+	//----------------------------------------------------------
+	// Private properties
+	//----------------------------------------------------------
+
+	/**
+	 * ...
+	 * @var TableRow
+	 */
+	private $row;
 
 	//----------------------------------------------------------
 	// Constructor method
@@ -32,9 +46,10 @@ class AuthModel extends Model {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->gateway			= new AuthTableGateway();
-		$this->rowGatewayClass	= "AuthRowGateway";
-		$this->tableName		= "User";
+		parent::__construct();
+		$this->setElement(DOM::createTable());
+		$this->row = new TableRow();
+		parent::add($this->row);
 	}
 
 	//----------------------------------------------------------
@@ -42,19 +57,14 @@ class AuthModel extends Model {
 	//----------------------------------------------------------
 
 	/**
-	 * Calls the gateway to find out 
-	 * if a match of username and password is found.
+	 * Adds a widget to the document body.
 	 *
-	 * @param	string	username
-	 * @param	string	password
-	 * @param	Record || null
+	 * @param	Widget	$widget
+	 * @return	void
 	 */
-	public  function attempt($username, $password) {
-		$user			= new Record();
-		$user->username	= $username;
-		$user->password	= $password;
-		$row = $this->gateway->match($user);
-		if (!isset($row)) return null;
-		return $row->getRecord();
+	public function add(Widget $widget) {
+		$td	= new TableCell();
+		$td->add($widget);
+		$this->row->add($td);
 	}
 }

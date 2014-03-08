@@ -48,7 +48,7 @@ class AuthTableGateway extends TableGateway {
 	 * @return	UserRowGateway | null
 	 */
 	public function match(Record $user) {
-		if (!isset($user->email)) return null;
+		if (!isset($user->username)) return null;
 		if (!isset($user->password)) return null;
 
 		$query	= $this->defaultQuery." WHERE ";
