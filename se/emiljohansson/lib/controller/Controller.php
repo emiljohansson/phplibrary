@@ -33,8 +33,8 @@
  *	@author		Emil Johansson <emiljohansson.se@gmail.com>
  *	@todo		Support json output.
  */
-class Controller
-{
+class Controller {
+
 	//-----------------------------------------------------------
 	//	Public properties
 	//-----------------------------------------------------------
@@ -76,8 +76,7 @@ class Controller
 	 *	
 	 *	@return	void
 	 */
-	public function __construct() 
-	{
+	public function __construct() {
 		$this->initModel();
 		$this->initView();
 	}
@@ -92,8 +91,7 @@ class Controller
 	 *	@param	Widget	$container
 	 *	@return	void
 	 */
-	public function go(Widget $container) 
-	{
+	public function go(Widget $container) {
 		$container->add($this->view->asWidget());
 	}
 
@@ -114,8 +112,7 @@ class Controller
 	 *	
 	 *	@return	void
 	 */
-	protected function initView() 
-	{
+	protected function initView() {
 		$this->view	= new View();
 	}
 
@@ -125,8 +122,7 @@ class Controller
 	 *	
 	 *	@return	void
 	 */
-	protected function initService() 
-	{
+	protected function initService() {
 		if (!isset($_GET['service'])) return;
 		$className = $_GET['service']."Service";
 		if (!class_exists($className)) return;
@@ -139,8 +135,7 @@ class Controller
 	 *	
 	 *	@return	void
 	 */
-	protected function initMethod() 
-	{
+	protected function initMethod() {
 		if (!isset($this->service)) return;
 		if (!isset($_GET['method'])) return;
 		$method	= $_GET['method'];
@@ -154,8 +149,7 @@ class Controller
 	 *	
 	 *	@return	void
 	 */
-	protected function initOutput() 
-	{
+	protected function initOutput() {
 		if (!isset($_GET['output'])) return;
 		$this->output = $_GET['output'];
 		if (!isset($this->service)) return;
@@ -167,8 +161,7 @@ class Controller
 	 *	
 	 *	@return	void
 	 */
-	protected function bind() 
-	{
+	protected function bind() {
 		if (!isset($this->view) || !isset($this->model)) return;
 		$this->view->model = $this->model;
 	}

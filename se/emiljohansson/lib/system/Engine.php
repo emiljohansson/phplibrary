@@ -170,7 +170,7 @@ class Engine {
 		}
 		$controllerClass = $_GET['controller']."Controller";
 		if (!class_exists($controllerClass)) {
-			Console::error(@$_GET['controller']." doesn't exist");
+			//Console::error(@$_GET['controller']." doesn't exist");
 			$this->initDefaultController();
 			return;
 		}

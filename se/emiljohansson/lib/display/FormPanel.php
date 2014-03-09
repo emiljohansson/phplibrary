@@ -42,6 +42,18 @@ class FormPanel extends SimplePanel {
 	 */
 	const METHOD_GET = "GET";
 
+	/**
+	 * DELETE request method.
+	 * @var string
+	 */
+	const METHOD_DELETE = "DELETE";
+
+	/**
+	 * PUT request method.
+	 * @var string
+	 */
+	const METHOD_PUT = "PUT";
+
 	//----------------------------------------------------------
 	// Constructor method
 	//----------------------------------------------------------

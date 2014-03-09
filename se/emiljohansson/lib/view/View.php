@@ -24,8 +24,8 @@
  *	@version	0.1.0
  *	@author		Emil Johansson <emiljohansson.se@gmail.com>
  */
-class View extends Panel
-{
+class View extends Panel {
+	
 	//-----------------------------------------------------------
 	//	Public static properties
 	//-----------------------------------------------------------
