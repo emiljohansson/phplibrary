@@ -72,7 +72,7 @@ class AuthController extends ApiController {
 	 * @return	void
 	 */
 	protected function initView() {
-		$this->view 				= new ApiView();
+		$this->view = new ApiView();
 		$this->view->model	= $this->model;
 	}
 
