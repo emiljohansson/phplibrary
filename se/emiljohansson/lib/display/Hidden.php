@@ -8,7 +8,7 @@
  * Inspired by the GWT library <http://www.gwtproject.org/>
  *
  * @copyright	Emil Johansson 2013
- * @license		http://www.opensource.org/licenses/mit-license.php MIT
+ * @license	http://www.opensource.org/licenses/mit-license.php MIT
  * @link		https://github.com/emiljohansson
  */
 
@@ -22,24 +22,24 @@
  * description...
  *
  * @version	0.1.0
-<<<<<<< HEAD
  * @author	Emil Johansson <emiljohansson.se@gmail.com>
  */
-class InlineLabel extends Label {
+class Hidden extends Input {
 
-=======
- * @author		Emil Johansson <emiljohansson.se@gmail.com>
- */
-class InlineLabel extends Label {
-	
->>>>>>> 49646b614ca65145e19c27aafad590a90a6191c9
 	//-----------------------------------------------------------
-	// Protected properties
+	// Constructor method
 	//-----------------------------------------------------------
 
 	/**
 	 * ...
-	 * @var string
+	 * 
+	 * @param	string	$value
+	 * @param	string	$name
+	 * @return	void
 	 */
-	protected $type = 'span';
+	public function __construct($value = "", $name = "") {
+		parent::__construct($value);
+		$this->setType('hidden');
+		$this->setAttribute('name', $name);
+	}
 }
