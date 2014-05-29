@@ -1,7 +1,6 @@
 <?php
 
-class Config 
-{
+class Config {
 	/**
 	 *	The domain host, e.g. localhost.
 	 *	@var string

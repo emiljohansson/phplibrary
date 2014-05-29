@@ -143,8 +143,9 @@ class TableGateway extends Gateway {
 	public function findByKey($key, $value) {
 		$query	= $this->defaultQuery." WHERE ".$key." IN ('".$value."') LIMIT 1";
 		$list	= $this->get($query);
-		if (count($list) > 0)
+		if (count($list) > 0) {
 			return $list[0];
+		}
 		return null;
 	}
 
@@ -165,7 +166,7 @@ class TableGateway extends Gateway {
 		catch (SQLException $e) {
 			throw $e;
 		}
-		$list	= array();
+		$list = array();
 		while ($record = $resultSet->next()) {
 			$rowGateway = $this->getRowGatewayObject();
 			$rowGateway->setRecord($record);

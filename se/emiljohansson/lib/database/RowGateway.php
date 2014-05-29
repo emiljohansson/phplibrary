@@ -50,7 +50,7 @@ class RowGateway extends Gateway {
 	 */
 	public function __construct($tableName) {
 		parent::__construct($tableName);
-		$this->record	= new Record();
+		$this->record = new Record();
 	}
 
 	//----------------------------------------------------------
@@ -166,8 +166,9 @@ class RowGateway extends Gateway {
 		$query	.= " (";
 
 		foreach ($arr as $key => $value) {
-			if (!in_array($key, $this->protectedFields))
+			if (!in_array($key, $this->protectedFields)) {
 				$query .= $key.",";
+			}
 		}
 
 		$query = substr_replace($query, ") ", -1);
@@ -175,7 +176,7 @@ class RowGateway extends Gateway {
 
 		foreach ($arr as $key => $value) {
 			if (!in_array($key, $this->protectedFields)) {
-				if ($value == null && $value != "0") {
+				if ($value === null && $value !== "0") {
 					$query .= "NULL,";
 				}
 				else {
