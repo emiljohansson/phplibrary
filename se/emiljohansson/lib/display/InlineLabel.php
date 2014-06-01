@@ -22,17 +22,10 @@
  * description...
  *
  * @version	0.1.0
-<<<<<<< HEAD
  * @author	Emil Johansson <emiljohansson.se@gmail.com>
  */
 class InlineLabel extends Label {
 
-=======
- * @author		Emil Johansson <emiljohansson.se@gmail.com>
- */
-class InlineLabel extends Label {
-	
->>>>>>> 49646b614ca65145e19c27aafad590a90a6191c9
 	//-----------------------------------------------------------
 	// Protected properties
 	//-----------------------------------------------------------
